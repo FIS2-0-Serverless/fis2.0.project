@@ -18,5 +18,5 @@
     "webpack": "^3.3.0"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
-  "license": "MIT"
+  "license": "Apache"
 }
