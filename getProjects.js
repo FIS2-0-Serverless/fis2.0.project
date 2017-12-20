@@ -8,12 +8,14 @@ export const handler = (event, context, cb) => {
 
   let project = new Project();
 
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(project.getAll()),
-  };
-
   promise
-    .then(() => cb(null, response))
+    .then(() => project.getAll())
+    .then((data) => {
+      let response = {
+        statusCode: 200,
+        body: JSON.stringify(data),
+      };
+      cb(null, response);
+    })
     .catch(e => cb(e));
 };
