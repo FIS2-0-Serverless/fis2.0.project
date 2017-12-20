@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+.idea/
