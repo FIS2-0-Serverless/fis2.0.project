@@ -9,14 +9,15 @@ export const handler = (event, context, callback) => {
 
   let project = new Project(new DynamoDB());
 
-  project.newProject(JSON.parse(event.body));
-
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify(event)
-    };
-
   promise
-    .then(() => callback(null, response))
+    .then(() => project.deleteProject(event.pathParameters.proxy))
+    .then((data) => {
+      const response = {
+        statusCode: 200,
+        body: JSON.stringify(data),
+      };
+
+      callback(null, response)
+    })
     .catch(e => callback(e));
 };

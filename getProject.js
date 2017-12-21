@@ -1,4 +1,5 @@
 import Project from './project';
+import { DynamoDB } from 'aws-sdk';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handler = (event, context, callback) => {
@@ -6,7 +7,7 @@ export const handler = (event, context, callback) => {
         resolve('success');
     });
 
-    let project = new Project();
+  let project = new Project(new DynamoDB());
 
     promise
       .then(() => project.getProject(event.pathParameters.proxy))

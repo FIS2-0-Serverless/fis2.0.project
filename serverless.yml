@@ -52,6 +52,13 @@ functions:
           method: get
           path: projects
           cors: true
+  deleteProject:
+      handler: deleteProject.handler
+      events:
+        - http:
+            method: delete
+            path: projects/{proxy+}
+            cors: true
 
 resources:
   Resources:
