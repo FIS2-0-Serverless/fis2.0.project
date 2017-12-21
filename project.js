@@ -27,13 +27,45 @@ export default class Project {
     });
   };
 
+  getProject = (projectCode) => {
+    let promise = new Promise((resolve, reject) => {
+      let params = {
+        Key: {
+          "projectCode": {
+            S: projectCode
+          }
+        },
+        TableName: "fisProjects"
+      };
+
+      this.dynamodb.getItem(params, (err, data) => {
+        if (err) {
+          console.log(err, err.stack);
+          reject(err);
+        } else {
+          console.log(JSON.stringify(data));
+          resolve(data);
+        }
+      });
+    });
+
+    return promise
+      .then((data) => {
+        return {
+          projectCode: data.Item.projectCode.S,
+          name: data.Item.name.S,
+          cst: data.Item.cst.S
+        };
+      });
+  };
+
   getAll = () => {
     let promise = new Promise((resolve, reject) => {
       let params = {
         TableName: "fisProjects"
       };
 
-      this.dynamodb.scan(params, function (err, data) {
+      this.dynamodb.scan(params, (err, data) => {
         if (err) {
           console.log(err, err.stack);
           reject(err);
