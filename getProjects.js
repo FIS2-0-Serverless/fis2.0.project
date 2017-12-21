@@ -1,5 +1,5 @@
 import Project from './project';
-import { DynamoDB } from 'aws-sdk';
+import {DynamoDB} from 'aws-sdk';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handler = (event, context, cb) => {
@@ -14,6 +14,10 @@ export const handler = (event, context, cb) => {
     .then((data) => {
       let response = {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+          "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS
+        },
         body: JSON.stringify(data),
       };
       cb(null, response);
